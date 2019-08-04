@@ -1,0 +1,9 @@
+Platform LogPlatform
+
+path "com.xatkit.plugins.log.platform.LogPlatform"
+
+actions {
+	LogInfo(message)
+	LogWarning(message)
+	LogError(message)
+}
