@@ -9,7 +9,7 @@ Print log messages from your Xatkit execution model. This platform is bundled wi
 
 ## Providers
 
-The core platform does not define any provider.
+The log platform does not define any provider.
 
 ## Actions
 
