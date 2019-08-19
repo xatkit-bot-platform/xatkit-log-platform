@@ -19,3 +19,6 @@ The log platform does not define any provider.
 | LogWarning | - `message` (**String**): the message to log with the `Warn` level | `null` | `null`      | Logs the provided `message` with the `Warn` level  |
 | LogError   | - `message` (**String**): the message to log with the `Error` level | `null` | `null`      | Logs the provided `message` with the `Error` level |
 
+## Options
+
+The log platform does not support any configuration option.
