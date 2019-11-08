@@ -9,9 +9,6 @@
     </formats>
     <files>
         <file>
-            <source>LogPlatform.xmi</source>
-        </file>
-        <file>
             <source>LogPlatform.platform</source>
         </file>
     </files>
