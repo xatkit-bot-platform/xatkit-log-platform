@@ -1,53 +1,40 @@
 package com.xatkit.plugins.log.platform.action;
 
+import com.xatkit.AbstractActionTest;
 import com.xatkit.plugins.log.platform.LogPlatform;
-import com.xatkit.AbstractXatkitTest;
-import com.xatkit.core.XatkitCore;
-import com.xatkit.stubs.StubXatkitCore;
 import org.apache.commons.configuration2.BaseConfiguration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.LoggerContext;
 import org.apache.logging.log4j.test.appender.ListAppender;
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.io.IOException;
 
-import static java.util.Objects.nonNull;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public abstract class LogActionTest<T extends LogAction> extends AbstractXatkitTest {
+public abstract class LogActionTest<T extends LogAction> extends AbstractActionTest<T, LogPlatform> {
 
     protected static String VALID_MESSAGE = "test";
 
     protected ListAppender listAppender;
 
-    protected LogPlatform logPlatform;
-
-    private static XatkitCore xatkitCore;
-
-    @BeforeClass
-    public static void setUpBeforeClass() {
-        xatkitCore = new StubXatkitCore();
-    }
-
-    @AfterClass
-    public static void tearDownAfterClass() {
-        if (nonNull(xatkitCore)) {
-            xatkitCore.shutdown();
-        }
-    }
-
     @Before
-    public void setUp() throws InterruptedException {
+    public void setUp() {
+        super.setUp();
         LoggerContext loggerContext = (LoggerContext) LogManager.getContext(false);
         listAppender = loggerContext.getConfiguration().getAppender("List");
         /*
          * Clear before the test, this logger is used by all the test cases and may contain messages before the first
          * test of this class. We also need to wait in case some messages are pending in the logger.
          */
-        Thread.sleep(200);
+        try {
+            Thread.sleep(200);
+        } catch(InterruptedException e) {
+            e.printStackTrace();
+        }
         listAppender.clear();
-        logPlatform = new LogPlatform(xatkitCore, new BaseConfiguration());
     }
 
     @After
@@ -85,4 +72,8 @@ public abstract class LogActionTest<T extends LogAction> extends AbstractXatkitT
         assertThat(listAppender.getMessages().get(0)).as("Action message in log").contains(VALID_MESSAGE);
     }
 
+    @Override
+    protected LogPlatform getPlatform() {
+        return new LogPlatform(mockedXatkitCore, new BaseConfiguration());
+    }
 }

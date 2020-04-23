@@ -3,13 +3,13 @@ package com.xatkit.plugins.log.platform.action;
 import com.xatkit.core.session.XatkitSession;
 import fr.inria.atlanmod.commons.log.Log;
 
-public class LogErrorTest extends LogActionTest {
+public class LogErrorTest extends LogActionTest<LogError> {
 
     private static String ERROR_TAG = "[ERROR]";
 
     @Override
-    protected LogAction createLogAction(String message) {
-        LogAction action = new LogError(logPlatform, new XatkitSession("id"), message);
+    protected LogError createLogAction(String message) {
+        LogError action = new LogError(platform, new XatkitSession("id"), message);
         /*
          * Clear the appender if the action initialization generated logs.
          */

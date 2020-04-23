@@ -3,13 +3,13 @@ package com.xatkit.plugins.log.platform.action;
 import com.xatkit.core.session.XatkitSession;
 import fr.inria.atlanmod.commons.log.Log;
 
-public class LogWarningTest extends LogActionTest {
+public class LogWarningTest extends LogActionTest<LogWarning> {
 
     private static String WARNING_TAG = "[WARN]";
 
     @Override
-    protected LogAction createLogAction(String message) {
-        LogAction action = new LogWarning(logPlatform, new XatkitSession("id"), message);
+    protected LogWarning createLogAction(String message) {
+        LogWarning action = new LogWarning(platform, new XatkitSession("id"), message);
         /*
          * Clear the appender if the action initialization generated logs.
          */
